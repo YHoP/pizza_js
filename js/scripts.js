@@ -1,6 +1,13 @@
+var pizzaSizes = ['Small 10\"', 'Medium 12\"', 'Large 14\"', 'Family Size 16\"'];
+var allTopppings = ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Extra cheese", "Black olives", "Green peppers", "Pineapple", "Spinach"];
+
 function Order(quantity, pizza){
   this.quantity = quantity;
   this.pizza = pizza;
+}
+
+Order.prototype.Total = function() {
+  return this.quantity * this.pizza.Price;
 }
 
 function Pizza(size){
@@ -8,20 +15,15 @@ function Pizza(size){
   this.topppings = [];
 }
 
-Pizza.prototype.size = function() {
-  return this.size;
+Pizza.prototype.sizeIndex = function() {
+  return pizzaSizes.indexOf(this.size);
 }
 
-Pizza.prototype.Topppings = function() {
-  var selectedTopppings;
-  for (var i in this.topppings){
-    selectedTopppings += this.topppings[i] + ", ";
-  }
-  return selectedTopppings;
+Pizza.prototype.Price = function() {
+  var pizzaPrice = 8;
+  pizzaPrice += (this.sizeIndex * 2 + this.topppings.length * 1);
+  return pizzaPrice;
 }
-
-var pizzaSizes = ['Small 10\"', 'Medium 12\"', 'Large 14\"', 'Family Size 16\"'];
-var allTopppings = ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Extra cheese", "Black olives", "Green peppers", "Pineapple", "Spinach"];
 
 function appendSize (){
   // append radio input
@@ -42,10 +44,18 @@ function appendToppings (){
   }
 }
 
+
+
 $(document).ready(function() {
 
   appendSize();
   appendToppings();
 
 
-}); // end of document
+  $("#addToCart").click(function() {
+
+
+
+}); // end of addToCart click
+
+}); // end of document ready
