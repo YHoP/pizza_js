@@ -4,12 +4,15 @@ describe("Pizza", function() {
 		expect(myPizza.size).to.equal("Small 10\"");
 		expect(myPizza.topppings).to.eql(["Pepperoni", "Pineapple", "Spinach"]);
 	});
-
+});
+describe("Pizza.sizeIndex()", function() {
 	it("adds the sizeIndex method to Pizza", function() {
 	    var myPizza = new Pizza("Medium 12\"", ["Pepperoni", "Pineapple"]);
 	    expect(myPizza.sizeIndex()).to.equal(1);
 	});
+});
 
+describe("Pizza.Price()", function() {
 	it("adds the Price method to Pizza", function() {
 			var myPizza = new Pizza("Large 14\"", ["Sausage", "Pineapple"]);
 			expect(myPizza.Price()).to.equal(13.2);
@@ -23,7 +26,9 @@ describe("Order", function() {
 		expect(myOrder.quantity).to.equal(1);
 		expect(myOrder.pizza).to.equal(myPizza);
 	});
+});
 
+describe("Order.Total()", function() {
 	it("adds the Total method to Order", function() {
 			var myPizza = new Pizza("Large 14\"", ["Sausage", "Pineapple"]);
 			var myOrder = new Order(2, myPizza);
