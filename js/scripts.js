@@ -1,14 +1,5 @@
-var pizzaSizes = ['Small 10\"', 'Medium 12\"', 'Large 14\"', 'Family Size 16\"'];
+var pizzaSizes = ["Small 10\"", "Medium 12\"", "Large 14\"", "Family Size 16\""];
 var allTopppings = ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Extra cheese", "Black olives", "Green peppers", "Pineapple", "Spinach"];
-
-function Order(quantity, pizza){
-  this.quantity = quantity;
-  this.pizza = pizza;
-}
-
-Order.prototype.Total = function() {
-  return this.quantity * this.pizza.Price;
-}
 
 function Pizza(size){
   this.size = size;
@@ -21,21 +12,23 @@ Pizza.prototype.sizeIndex = function() {
 
 Pizza.prototype.Price = function() {
   var pizzaPrice = 8;
-  pizzaPrice += (this.sizeIndex * 2 + this.topppings.length * 1);
+  pizzaPrice += (this.sizeIndex() * 2 + this.topppings.length * 0.6);
   return pizzaPrice;
 }
 
-function appendSize (){
-  // append radio input
-  var text = "<select name='pizzaSize'>";
-  for(var i in pizzaSizes){
-    text += "<option value='"+ (10 + i * 2) +"'>"+ pizzaSizes[i] +"</option>";
+function Order(quantity, pizza){
+  this.quantity = quantity;
+  this.pizza = pizza;
+}
 
-    // append radio inout
-    $(".pizzaSize_radio").append("<label><input type='radio' name='pizzaSize' id='size" + (10 + i * 2) + "' value='"+ (10 + i * 2) +"'> "+ pizzaSizes[i] +"</label><br>");
+Order.prototype.Total = function() {
+  return this.quantity * this.pizza.Price();
+}
+
+function appendSize (){
+  for(var i in pizzaSizes){
+    $(".pizzaSize_radio").append("<label><input type='radio' name='pizzaSize' value='"+ (10 + i * 2) +"'> "+ pizzaSizes[i] +"</label><br>");
   }
-  text += "</select>";
-  $(".pizzaSize_dropdown").append(text);
 }
 
 function appendToppings (){
@@ -44,15 +37,18 @@ function appendToppings (){
   }
 }
 
-
-
 $(document).ready(function() {
 
   appendSize();
   appendToppings();
-
+  var myOrder = new Order() ;
 
   $("#addToCart").click(function() {
+
+  var pizzaSize = $("input[name=pizzaSize]:checked").val();
+  console.log("radio :" + pizzaSize);
+
+  $(".total").text();
 
 
 
