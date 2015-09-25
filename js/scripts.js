@@ -1,9 +1,9 @@
 var pizzaSizes = ["Small 10\"", "Medium 12\"", "Large 14\"", "Family Size 16\""];
-var allTopppings = ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Extra cheese", "Black olives", "Green peppers", "Pineapple", "Spinach"];
+var alltoppings = ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Extra cheese", "Black olives", "Green peppers", "Pineapple", "Spinach"];
 
 function Pizza(size){
   this.size = size;
-  this.topppings = [];
+  this.toppings = [];
 }
 
 Pizza.prototype.sizeIndex = function() {
@@ -12,7 +12,7 @@ Pizza.prototype.sizeIndex = function() {
 
 Pizza.prototype.Price = function() {
   var pizzaPrice = 8;
-  pizzaPrice += (this.sizeIndex() * 2 + this.topppings.length * 0.6);
+  pizzaPrice += (this.sizeIndex() * 2 + this.toppings.length * 0.6);
   return pizzaPrice;
 }
 
@@ -27,31 +27,40 @@ Order.prototype.Total = function() {
 
 function appendSize (){
   for(var i in pizzaSizes){
-    $(".pizzaSize_radio").append("<label><input type='radio' name='pizzaSize' value='"+ (10 + i * 2) +"'> "+ pizzaSizes[i] +"</label><br>");
+    $(".pizzaSize").append("<label><input type='radio' name='pizzaSize' value='"+ pizzaSizes[i] +"'> "+ pizzaSizes[i] +"</label><br>");
   }
 }
 
 function appendToppings (){
-  for(var i in allTopppings){
-    $(".pizzaToppings").append("<label><input type='checkbox' value='"+ allTopppings[i] +"'> "+ allTopppings[i] +"</label><br>");
+  for(var i in alltoppings){
+    $(".pizzaToppings").append("<label><input type='checkbox' name='toppings' value='"+ alltoppings[i] +"'> "+ alltoppings[i] +"</label><br>");
   }
+}
+
+function getPizzaSize (index) {
+    return pizzaSizes[index];
 }
 
 $(document).ready(function() {
 
   appendSize();
   appendToppings();
-  var myOrder = new Order() ;
+
+  var myPizza;
+  var myOrder;
+
 
   $("#addToCart").click(function() {
+    myPizza = new Pizza($("input[name=pizzaSize]:checked").val());
 
-  var pizzaSize = $("input[name=pizzaSize]:checked").val();
-  console.log("radio :" + pizzaSize);
+    $.each($("input[name='toppings']:checked"), function(){
+        myPizza.toppings.push($(this).val());
+    });
 
-  $(".total").text();
+    var quantity = $("input[name=quantity]").val();
+    myOrder = new Order(quantity, myPizza);
 
-
-
-}); // end of addToCart click
+    $(".total").text("$ " + myOrder.Total().toFixed(2));
+  }); // end of addToCart click
 
 }); // end of document ready
