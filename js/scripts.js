@@ -16,6 +16,14 @@ Pizza.prototype.Price = function() {
   return pizzaPrice;
 }
 
+Pizza.prototype.addTopping = function(topping) {
+  this.toppings.push(topping);
+}
+
+Pizza.prototype.deleteTopping = function(topping) {
+
+}
+
 function Order(quantity, pizza){
   this.quantity = quantity;
   this.pizza = pizza;
@@ -43,34 +51,49 @@ function appendToppings (){
   }
 }
 
-function getPizzaSize (index) {
-    return pizzaSizes[index];
-}
-
 
 $(document).ready(function() {
 
   appendSize();
   appendToppings();
 
-  var myPizza = new Pizza(getPizzaSize(0));
+  var myPizza = new Pizza("Small 10\"");
   var myOrder = new Order(1, myPizza);
 
-  $("input[name=pizzaSize]:radio").change(function() {
-    myPizza.size = $("input[name=pizzaSize]:checked").val();
+  $(":radio").change(function() {
+    myPizza.size = $(this).val();
+    myOrder.pizza = myPizza;
+    $(".total").text("$ " + myOrder.Total());
+  });
+
+  $(":checkbox").click(function() {
+    if($(this).is(":checked")){
+      if(myPizza.toppings.indexOf($(this).val()) < 0){
+        myPizza.addTopping($(this).val());
+      }
+    } else {
+      if(myPizza.toppings.indexOf($(this).val()) > -1){
+
+      }
+    }
+
+    console.log(myPizza.toppings);
 
     myOrder.pizza = myPizza;
     $(".total").text("$ " + myOrder.Total());
   });
 
+  $(".quantity").keyup(function() {
+    myOrder.quantity = $("input[name=quantity]").val();
+    $(".total").text("$ " + myOrder.Total());
+  });
+
+  $(".quantity").change(function() {
+    myOrder.quantity = $("input[name=quantity]").val();
+    $(".total").text("$ " + myOrder.Total());
+  });
+
   $("#addToCart").click(function() {
-    myPizza.size = $("input[name=pizzaSize]:checked").val();
-
-    $.each($("input[name='toppings']:checked"), function(){
-        myPizza.toppings.push($(this).val());
-    });
-
-    myOrder.updateOrder($("input[name=quantity]").val(), myPizza);
 
     $(".total").text("$ " + myOrder.Total());
   }); // end of addToCart click
