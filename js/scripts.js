@@ -22,7 +22,13 @@ function Order(quantity, pizza){
 }
 
 Order.prototype.Total = function() {
-  return this.quantity * this.pizza.Price();
+  var total = (this.quantity * this.pizza.Price()).toFixed(2);
+  return total;
+}
+
+Order.prototype.updateOrder = function(quantity, pizza){
+  this.quantity = quantity;
+  this.pizza = pizza;
 }
 
 function appendSize (){
@@ -41,26 +47,32 @@ function getPizzaSize (index) {
     return pizzaSizes[index];
 }
 
+
 $(document).ready(function() {
 
   appendSize();
   appendToppings();
 
-  var myPizza;
-  var myOrder;
+  var myPizza = new Pizza(getPizzaSize(0));
+  var myOrder = new Order(1, myPizza);
 
+  $("input[name=pizzaSize]:radio").change(function() {
+    myPizza.size = $("input[name=pizzaSize]:checked").val();
+
+    myOrder.pizza = myPizza;
+    $(".total").text("$ " + myOrder.Total());
+  });
 
   $("#addToCart").click(function() {
-    myPizza = new Pizza($("input[name=pizzaSize]:checked").val());
+    myPizza.size = $("input[name=pizzaSize]:checked").val();
 
     $.each($("input[name='toppings']:checked"), function(){
         myPizza.toppings.push($(this).val());
     });
 
-    var quantity = $("input[name=quantity]").val();
-    myOrder = new Order(quantity, myPizza);
+    myOrder.updateOrder($("input[name=quantity]").val(), myPizza);
 
-    $(".total").text("$ " + myOrder.Total().toFixed(2));
+    $(".total").text("$ " + myOrder.Total());
   }); // end of addToCart click
 
 }); // end of document ready
