@@ -1,4 +1,4 @@
-var pizzaSizes = ["Small 10\"", "Medium 12\"", "Large 14\"", "Family Size 16\""];
+var pizzaSizes = ["Nano 3\"", "Micro 5\"", "Normal 7\"", "Deca 11\"", "Hecto 13\"", "Mega 17\"", "Giga 19\"", "Tera 23\""];
 var alltoppings = ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Extra cheese", "Black olives", "Green peppers", "Pineapple", "Spinach"];
 
 function Pizza(size){
@@ -18,10 +18,15 @@ Pizza.prototype.Price = function() {
 
 Pizza.prototype.addTopping = function(topping) {
   this.toppings.push(topping);
+  return this.toppings;
 }
 
-Pizza.prototype.deleteTopping = function(topping) {
-
+Pizza.prototype.removeTopping = function(topping) {
+  var index = this.toppings.indexOf(topping);
+  delete this.toppings[index];
+  this.toppings.sort();
+  this.toppings.pop();
+  return this.toppings;
 }
 
 function Order(quantity, pizza){
@@ -40,7 +45,8 @@ Order.prototype.updateOrder = function(quantity, pizza){
 }
 
 function appendSize (){
-  for(var i in pizzaSizes){
+  $(".pizzaSize").append("<label><input type='radio' name='pizzaSize' value='"+ pizzaSizes[0] +"' checked> "+ pizzaSizes[0] +"</label><br>");
+  for(var i = 1; i < pizzaSizes.length; i ++){
     $(".pizzaSize").append("<label><input type='radio' name='pizzaSize' value='"+ pizzaSizes[i] +"'> "+ pizzaSizes[i] +"</label><br>");
   }
 }
@@ -56,9 +62,10 @@ $(document).ready(function() {
 
   appendSize();
   appendToppings();
-
+  // initial quantity, pizza size and order
+  var quantity = 1;
   var myPizza = new Pizza("Small 10\"");
-  var myOrder = new Order(1, myPizza);
+  var myOrder = new Order(quantity, myPizza);
 
   $(":radio").change(function() {
     myPizza.size = $(this).val();
@@ -72,14 +79,9 @@ $(document).ready(function() {
         myPizza.addTopping($(this).val());
       }
     } else {
-      if(myPizza.toppings.indexOf($(this).val()) > -1){
-
-      }
+        myPizza.removeTopping($(this).val());
     }
 
-    console.log(myPizza.toppings);
-
-    myOrder.pizza = myPizza;
     $(".total").text("$ " + myOrder.Total());
   });
 
@@ -93,7 +95,7 @@ $(document).ready(function() {
     $(".total").text("$ " + myOrder.Total());
   });
 
-  $("#addToCart").click(function() {
+  $("#checkOut").click(function() {
 
     $(".total").text("$ " + myOrder.Total());
   }); // end of addToCart click
