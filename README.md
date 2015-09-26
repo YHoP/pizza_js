@@ -8,7 +8,7 @@
 
 ## Description
 * Allow the user to choose quantity, toppings and size.<br>
-* Create a method for the cost of a pizza depending on the selections chosen. Use your own formula for this.<br>
+* Create a method for the cost of a pizza depending on the selections chosen.<br>
 
 ![alt tag](https://raw.githubusercontent.com/YHoP/pizza_js/master/img/ScreenShot.png)
 
