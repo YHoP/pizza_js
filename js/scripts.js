@@ -1,5 +1,5 @@
 var pizzaSizes = ["Nano 3\"", "Micro 5\"", "Normal 7\"", "Deca 11\"", "Hecto 13\"", "Mega 17\"", "Giga 19\"", "Tera 23\""];
-var alltoppings = ["Bat Wings", "Witch\'s Fingers", "Alligator Slice", "Snake Eyes", "Fried Crickets", "Seasoned Spider", "Vampire Blood", "Zombie Brain", "Goblin Bone", "Orc Intestine"];
+var alltoppings = ["Snake Venom", "Vampire Blood", "Bat Fangs", "Witch\'s Fingers", "Alligator Eyes", "Fried Crickets", "Seasoned Spider",  "Zombie Brain", "Goblin Bone", "Orc Intestine"];
 
 function Pizza(size){
   this.size = size;
