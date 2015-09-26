@@ -86,12 +86,12 @@ $(document).ready(function() {
   });
 
   $(".quantity").keyup(function() {
-    myOrder.quantity = $("input[name=quantity]").val();
+    myOrder.quantity = Math.abs($("input[name=quantity]").val());
     $(".total").text("$ " + myOrder.Total());
   });
 
   $(".quantity").change(function() {
-    myOrder.quantity = $("input[name=quantity]").val();
+    myOrder.quantity = Math.abs($("input[name=quantity]").val());
     $(".total").text("$ " + myOrder.Total());
   });
 
