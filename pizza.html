@@ -11,24 +11,25 @@
 <body>
   <div class="container">
     <h1 class="title">Create Your Pizza and Order Online</h1>
-    <div class="col-md-6">
-        <label for="pizzaSize">Choose your pizza size</label>
-        <span class="pizzaSize_dropdown"></span>
-        <br>
-        <span class="pizzaSize_radio"></span>
-        <br>
-        <label for="pizzaSize">Choose your topppings</label>
+      <div class="col-md-4 well">
+          <label for="pizzaSize" class="label">Pizza Size</label>
+          <br>
+          <span class="pizzaSize"></span>
+      </div>
+      <div class="col-md-4 well">
+        <label for="pizzaToppings" class="label">Topppings</label>
         <br>
         <span class="pizzaToppings"></span>
-        <br>
-    </div>
-    <div class="col-md-6">
-      <label for="quantity">Quantity </label>
-      <input type="text" name="quantity" placeholder="1">
-      <br>
-      <h3><span class="total"></span></h3>
-      <button id="addToCart" class="btn btn-danger">Add to Cart</button>
-    </div>
+      </div>
+      <div class="col-md-4 well">
+        <label for="quantity" class="label">Quantity  </label>
+        <input type="number" name="quantity" class="quantity" value="1" min="1" max="2018">
+        <br><br>
+        <label><h3>Total: <span class="total"></span></h3></label>
+        <div class="right">
+          <button id="checkOut" class="btn btn-danger">Check Out</button>
+        </div>
+      </div>
   </div>
 </div>
 </body>
