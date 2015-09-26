@@ -9,8 +9,8 @@
   <title>Order Pizza Online</title>
 </head>
 <body>
-  <div class="container">
-    <h1 class="title">Create Your Pizza and Order Online</h1>
+  <div class="container" id="placeOrder">
+    <h1 class="title">Create Your Halloween Pizza</h1>
       <div class="col-md-4 well">
           <label for="pizzaSize" class="label">Pizza Size</label>
           <br>
@@ -25,11 +25,19 @@
         <label for="quantity" class="label">Quantity  </label>
         <input type="number" name="quantity" class="quantity" value="1" min="1" max="2018">
         <br><br>
-        <label><h3>Total: <span class="total"></span></h3></label>
+        <label><h3>&nbsp; Total: <span class="total"></span></h3></label>
         <div class="right">
           <button id="checkOut" class="btn btn-danger">Check Out</button>
         </div>
       </div>
+  </div>
+  <div class="col-md-6" id="purchase">
+    <div class="well">
+      <h3>Thank you for purchasing our halloween pizza! </h3>
+      <h3>Your total : <span class="total"></span></h3>
+      <h3>Cash or gold coins only. Please pay our owl on delivery.</h3>
+      <h4>Your pizza will be delivered in 13 hours.</h4>
+    </div>
   </div>
 </div>
 </body>

@@ -1,0 +1,36 @@
+body{
+  background-image: url(../img/halloween.png);
+  background-repeat: repeat-x;
+}
+
+h1 {
+  text-shadow: 3px 3px 9px #FFD699;
+}
+
+.label {
+  font-size: 18px;
+  color: #FF9900;
+}
+
+h3 {
+  color: #D11919;
+}
+
+.well {
+  margin: 1em;
+  padding: 2em;
+  border: 1px solid #FF9900;
+  border-radius: 25px;
+}
+
+.right {
+  text-align: right;
+}
+
+#purchase {
+  position: fixed;
+  margin: auto;
+  top: 100px;
+
+  text-shadow: 3px 3px 9px #FFD699;
+}
